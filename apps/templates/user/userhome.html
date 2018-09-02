@@ -1,0 +1,41 @@
+{% extends 'bootstrap/base.html' %}
+
+
+{% block title %} 用户管理首页 {% endblock %}
+{% block navbar %}
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url_for("user.user_home") }}">用户管理</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ url_for("user.register") }}">注册</a></li>
+                    <li><a href="#">登录</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+{% block content %}
+    <div class="page-header">
+        <div class="container">
+            <h1>用户管理</h1>
+        </div>
+    </div>
+    <div class="container">
+                <div>管理内容</div>
+    </div>
+{% endblock content %}
+
+
+

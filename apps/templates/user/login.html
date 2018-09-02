@@ -1,0 +1,64 @@
+{% extends 'bootstrap/base.html' %}
+{% block title %}todo list{% endblock %}
+{% block navbar %}
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"></a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="col-xs-6 col-xs-offset-3">
+            <div class="page-header">
+                <h3 class="text-center">用户登陆</h3>
+            </div>
+
+
+            <form action="{{ url_for("user.login") }}" method="post" class="form-horizontal" novalidate>
+                {% for foo in form %}
+                    {% if not loop.last %}
+                        <div>{{ foo.label }}{{ foo }}</div>
+                    {% else %}
+                        {{ foo }}
+                    {% endif %}
+                    <div class="text-danger">{{ foo.errors[0] }}</div>
+                {% endfor %}
+
+
+
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">登陆</button>
+                </div>
+
+
+            </form>
+
+
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
