@@ -1,5 +1,5 @@
 {% extends 'bootstrap/base.html' %}
-{% block title %}todo list{% endblock %}
+{% block title %}商家后台管理登陆{% endblock %}
 {% block navbar %}
     <nav class="navbar navbar-inverse">
         <div class="container">
@@ -36,16 +36,23 @@
                 {% for foo in form %}
                     {% if not loop.last %}
                         <div>{{ foo.label }}{{ foo }}</div>
+                        <div class="text-danger">{{ foo.errors[0] }}</div>
                     {% else %}
                         {{ foo }}
                     {% endif %}
-                    <div class="text-danger">{{ foo.errors[0] }}</div>
+
                 {% endfor %}
+
+            {% for get_flashed_message in get_flashed_messages() %}
+                <div class="text-danger">{{ get_flashed_message }}</div>
+            {% endfor %}
 
 
 
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-success">登陆</button>
+                    <div style="height: 10px"></div>
+                    <button type="submit" class="btn btn-success">登陆</button>&emsp;&emsp;&emsp;
+                    <a href="{{ url_for("cms.register") }}">没有账户,前去注册...</a>
                 </div>
 
 

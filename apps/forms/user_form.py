@@ -37,23 +37,23 @@ class RegisterForm(FlaskForm):
 
 # 用户登陆form验证
 class UserLogin(FlaskForm):
+    # try   要求用户名格式
+    # validators = [
+    #     DataRequired(), Length(1, 64), '^[A-Za-z][A-Za-z0-9_.]*$', 0, u'用户名必须由字母、数字、下划线或 . 组成']
+
     username = StringField(label="用户名 :",
-                           validators=(validators.DataRequired(message="请输入用户名"),
-                                       validators.Length(max=16, message="用户名字符数太多"),
-                                       validators.Length(min=3, message="用户名不能少于3个字符"),
+                           validators=(validators.DataRequired(message="请填写用户名"),
                                        ),
-                           render_kw={"class": "form-control placeholder='请输入用户名'"}
+                           render_kw={"class": "form-control", "placeholder": "请输入账号!", "required": 'required'}
                            )
     password = PasswordField(label="密  码:",
                              validators=(validators.DataRequired(message="请填写密码"),
                                          ),
-                             render_kw={"class": "form-control placeholder='密码'"}
+                             render_kw={"class": "form-control", "placeholder": "请输入密码!"}
                              )
 
 
-    def check(self):
 
-        return check_password_hash()
 
 
 
