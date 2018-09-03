@@ -32,7 +32,7 @@
             </div>
 
 
-            <form action="{{ url_for("user.login") }}" method="post" class="form-horizontal" novalidate>
+            <form action="{{ url_for("cms.login") }}" method="post" class="form-horizontal" novalidate>
                 {% for foo in form %}
                     {% if not loop.last %}
                         <div>{{ foo.label }}{{ foo }}</div>

@@ -1,4 +1,4 @@
-from apps.cms import user_bp
+from apps.cms import cms_bp
 from flask import render_template, request, redirect, url_for
 import uuid
 from apps.libs.helper import set_attrs
@@ -8,7 +8,7 @@ from apps.model.user_model import User
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-@user_bp.route("/", endpoint='user_home', methods=["POST", "GET"])
+@cms_bp.route("/", endpoint='user_home', methods=["POST", "GET"])
 def user_home():
     '''
     后台用户首页,用于用户管理
@@ -21,7 +21,7 @@ def user_home():
 
 
 # 用户注册
-@user_bp.route("/register/", endpoint="register", methods=["POST", "GET"])
+@cms_bp.route("/register/", endpoint="register", methods=["POST", "GET"])
 def register():
     form = RegisterForm()
     if request.method == "POST" and form.validate():
@@ -37,13 +37,13 @@ def register():
         # new_user = set_attrs(new_user, form.data)
         # db.session.add(new_user)
 
-        return redirect(url_for("user.user_home"))
+        return redirect(url_for("cms.user_home"))
     else:
         return render_template("user/register.html", form=form)
 
 
 # 用户登陆
-@user_bp.route("/login/", endpoint="login", methods=["POST", "GET"])
+@cms_bp.route("/login/", endpoint="login", methods=["POST", "GET"])
 def login():
     '''
     post:提交用户登陆信息

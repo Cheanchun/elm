@@ -1,5 +1,5 @@
 from flask import Blueprint
 
-user_bp = Blueprint("user", __name__, subdomain="user")
+cms_bp = Blueprint("cms", __name__, subdomain="cms")
 
 from . import view

@@ -19,7 +19,7 @@
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ url_for("user.login") }}">登录</a></li>
+                    <li><a href="{{ url_for("cms.login") }}">登录</a></li>
                 </ul>
             </div>
         </div>
@@ -33,7 +33,7 @@
             </div>
 
 
-            <form action="{{ url_for("user.register") }}" method="post" class="form-horizontal" novalidate>
+            <form action="{{ url_for("cms.register") }}" method="post" class="form-horizontal" novalidate>
 
                 {% for foo in form %}
                     {% if not loop.last %}

@@ -1,5 +1,5 @@
 from flask import Flask
-from apps.cms import user_bp
+from apps.cms import cms_bp
 from apps.model import db
 
 
@@ -10,6 +10,6 @@ def create_app():
     # 初始化 数据库模型
     db.init_app(app)
     # 注册蓝图
-    app.register_blueprint(user_bp)
+    app.register_blueprint(cms_bp)
     print(app.url_map)
     return app
