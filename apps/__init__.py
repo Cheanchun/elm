@@ -14,7 +14,7 @@ def create_app():
     # 加载app 配置文件
     app.config.from_object("apps.settings.DevConfig")
     # 设置session过期时间
-    app.permanent_session_lifetime = timedelta(seconds=10)
+    # app.permanent_session_lifetime = timedelta(seconds=10)
     Session(app)
 
     # 初始化 数据库模型

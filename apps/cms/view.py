@@ -8,10 +8,16 @@ from flask import (render_template,
 import uuid
 from apps.model import db
 from apps.forms.user_form import (RegisterForm,
-                                  UserLogin)
+                                  UserLogin,
+                                  )
 from apps.model.user_model import User
 from werkzeug.security import (generate_password_hash,
-                               check_password_hash)
+                               check_password_hash,
+                               )
+
+
+# 用户首页
+# @login_verify()  #装饰器验证
 
 
 
@@ -90,5 +96,13 @@ def login():
             flash("用户名或密码错误!")
 
     # print(form.password)
-
+    # form.password.label = """<p><label for="password">密  码:<input class="form-control" id="username" name="username" placeholder="请输入密码!" required type="password" value=""></label></p>"""
+    # form.username.label = """<p><label for="username">用户名:<input class="form-control" id="username" name="username" placeholder="请输入账号!" required="required" type="text" value=""></label></p>"""
     return render_template("user/login.html", form=form)
+
+
+# 用户注销
+@cms_bp.route("/logout/", endpoint="logout",methods=["GET"])
+def logout():
+    session["username"] = ""
+    return redirect(url_for("cms.login"))
