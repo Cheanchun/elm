@@ -14,11 +14,7 @@ from apps.model.user_model import User
 from werkzeug.security import (generate_password_hash,
                                check_password_hash,
                                )
-
-
-# 用户首页
-# @login_verify()  #装饰器验证
-
+from flask_login import login_user, login_required, logout_user, current_user
 
 
 @cms_bp.route("/", endpoint='user_home', methods=["POST", "GET"])
@@ -29,17 +25,13 @@ def user_home():
         1.如果用户登陆(session存在标记,直接访问用户页面,如果没有登陆,重定向到登陆页面)
     :return:
     '''
-    username = session.get("username")
-    if request.method == "GET" and username:
-        return render_template("user/userhome.html",username = username )
-    else:
-        return redirect(url_for("cms.login"))
+    return render_template("user/userhome.html")
+
 
 # 用户注册
 @cms_bp.route("/register/", endpoint="register", methods=["POST", "GET"])
 def register():
     form = RegisterForm()
-
     if request.method == "POST" and form.validate():
         h_password = generate_password_hash(form.password.data)
         new_user = User()
@@ -78,31 +70,29 @@ def login():
         username = login_info.get("username")
 
         user = User.query.filter_by(username=username).first()
-        h_password = user.password
-        user_id = user.id
-        # 验证密码是否正确
-        if check_password_hash(h_password, password):
-            session['user_id'] = user_id
-            session['username'] = username
-
-            # 设置会话session
-            # session.permanent = True
-            return redirect(url_for("cms.user_home", username=username))
+        if user:
+            h_password = user.password
+            # 验证密码是否正确
+            if check_password_hash(h_password, password):
+                login_user(user)
+                return redirect(url_for("cms.user_home"))
+            else:
+                # flash的用法
+                '''
+                相当于一个可迭代对象,
+                '''
+                flash("用户名或密码错误!")
         else:
             # flash的用法
             '''
             相当于一个可迭代对象,
             '''
             flash("用户名或密码错误!")
-
-    # print(form.password)
-    # form.password.label = """<p><label for="password">密  码:<input class="form-control" id="username" name="username" placeholder="请输入密码!" required type="password" value=""></label></p>"""
-    # form.username.label = """<p><label for="username">用户名:<input class="form-control" id="username" name="username" placeholder="请输入账号!" required="required" type="text" value=""></label></p>"""
     return render_template("user/login.html", form=form)
 
 
 # 用户注销
-@cms_bp.route("/logout/", endpoint="logout",methods=["GET"])
+@cms_bp.route("/logout/", endpoint="logout", methods=["GET"])
 def logout():
-    session["username"] = ""
-    return redirect(url_for("cms.login"))
+    logout_user()
+    return redirect(url_for("cms.user_home"))

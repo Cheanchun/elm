@@ -16,11 +16,24 @@
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for("cms.user_home") }}">用户管理</a></li>
+                    <li><a href="{{ url_for("cms.user_home") }}">商家后台管理系统</a></li>
+                    {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for("cms.my_shop") }}">我的店铺</a></li>
+                    {% else %}
+                    <li><a href="{{ url_for("cms.add_shop") }}">我要开店</a></li>
+                    {% endif %}
+
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="JavaScript:;">你好:{{ username }}</a></li>
-                    <li><a href="{{ url_for("cms.logout") }}">注销</a></li>
+                    {% if current_user.is_authenticated %}
+                        <li><a href="JavaScript:;">你好:{{ current_user.username }}</a></li>
+                        <li><a href="{{ url_for("cms.logout") }}">注销</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for("cms.login") }}">登陆</a></li>
+                        <li><a href="{{ url_for("cms.register") }}">注册</a></li>
+                    {% endif %}
+
+
                 </ul>
             </div>
         </div>
@@ -33,7 +46,7 @@
         </div>
     </div>
     <div class="container">
-                <div>管理内容</div>
+        <div>管理内容</div>
     </div>
 {% endblock content %}
 

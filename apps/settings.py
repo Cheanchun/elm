@@ -1,12 +1,8 @@
-# app通用配置
 import os
-import sys
 from datetime import timedelta
-from os.path import dirname
-
 from redis import Redis
 
-
+# app通用配置
 class BaseConfig:
     pass
 
@@ -28,7 +24,7 @@ class DevConfig(BaseConfig):
     SESSION_TYPE = "redis"
     SESSION_REDIS = Redis("127.0.0.1", 6379)
     # 设置session过期时间
-    PERMANENT_SESSION_LIFETIME = timedelta(days=1)
+    PERMANENT_SESSION_LIFETIME = timedelta(weeks=2)
 
 
 

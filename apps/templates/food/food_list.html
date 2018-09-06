@@ -1,5 +1,5 @@
 {% extends 'bootstrap/base.html' %}
-{% block title %}新用户注册{% endblock %}
+{% block title %}菜品列表{% endblock %}
 {% block navbar %}
     <nav class="navbar navbar-inverse">
         <div class="container">
@@ -11,7 +11,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="JavaScript:;">注册新用户</a>
+                <a class="navbar-brand" href="#"></a>
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -19,7 +19,6 @@
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ url_for("cms.login") }}">登录</a></li>
                 </ul>
             </div>
         </div>
@@ -29,22 +28,32 @@
     <div class="container">
         <div class="col-xs-6 col-xs-offset-3">
             <div class="page-header">
-                <h3 class="text-center">填写注册信息</h3>
+                <h3 class="text-center">菜品列表</h3>
             </div>
 
 
-            <form action="{{ url_for("cms.register") }}" method="post" class="form-horizontal" novalidate>
-
+            <form action="{{ url_for("cms.login") }}" method="post" class="form-horizontal" novalidate>
                 {% for foo in form %}
                     {% if not loop.last %}
-                        <p>{{ foo.label }}{{ foo }}</p>
+                        <div>{{ foo.label }}{{ foo }}</div>
+                        <div class="text-danger">{{ foo.errors[0] }}</div>
                     {% else %}
-                        <p>{{ foo }}</p>
+                        {{ foo }}
                     {% endif %}
-                    <div class="text-danger">{{ foo.errors[0] }}</div>
+
                 {% endfor %}
 
-                    <button type="submit" class="btn btn-success">注册</button>
+            {% for get_flashed_message in get_flashed_messages() %}
+                <div class="text-danger">{{ get_flashed_message }}</div>
+            {% endfor %}
+
+
+
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div style="height: 10px"></div>
+                    <button type="submit" class="btn btn-success">登陆</button>&emsp;&emsp;&emsp;
+                    <a href="{{ url_for("cms.register") }}">没有账户,前去注册...</a>
+                </div>
 
 
             </form>
@@ -53,10 +62,3 @@
         </div>
     </div>
 {% endblock %}
-
-
-
-
-
-
-
