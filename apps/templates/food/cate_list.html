@@ -49,35 +49,21 @@
                     <thead>
                     <tr>
                         <th>序号</th>
-                        <th>菜品名字</th>
-                        <th>归属店铺</th>
-                        <th>归属分类</th>
-                        <th>菜品价格</th>
-                        <th>月销售额</th>
-                        <th>评分数量</th>
-                        <th>菜品描述</th>
-                        <th>提示信息</th>
-
+                        <th>分类名称</th>
+                        <th>分类描述</th>
+                        <th>分类编号</th>
                     </tr>
                     </thead>
-                    {% if foods %}
+                    {% if cates %}
                         <tbody>
-                        {% for food in foods %}
+                        {% for cate in cates %}
                             <tr>
                                 <th>{{ loop.index }}</th>
                                 <th>
-                                    <a href="{{ url_for("cms.food_update",food_pid=food.goods_id,shop_pub_id =food.shop_id ) }}">{{ food.goods_name }}</a>
+                                    <a href="{{ url_for("cms.cate_update",pub_id =cate.pub_id,shop_id =cate.shop_id ) }}">{{ cate.name }}</a>
                                 </th>
-
-                                <th>{{ food.cates.shop.shop_name}}</th>
-                                <th>{{ food.cates.name}}</th>
-                                <th>{{ food.goods_price }}</th>
-                                <th>{{ food.month_sales }}</th>
-                                <th>{{ food.rating_count }}</th>
-                                <th>{{ food.description }}</th>
-                                <th>{{ food.tips }}</th>
-
-
+                                <th>{{ cate.description }}</th>
+                                <th>{{ cate.type_accumulation }}</th>
                             </tr>
                         {% endfor %}
 

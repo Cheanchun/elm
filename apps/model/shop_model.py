@@ -15,13 +15,13 @@ class SellerShop(BaseModel):
     # 是否是品牌
     brand = db.Column(db.Boolean, default=False)
     # 是否准时送达
-    on_time = db.Column(db.Boolean, default=True)
+    on_time = db.Column(db.Boolean, default=False)
     # 是否蜂鸟配送
-    fengniao = db.Column(db.Boolean, default=True)
+    fengniao = db.Column(db.Boolean, default=False)
     # 是否保险
     bao = db.Column(db.Boolean, default=False)
     # 是否有发票
-    piao = db.Column(db.Boolean, default=True)
+    piao = db.Column(db.Boolean, default=False)
     # 是否准标识
     zhun = db.Column(db.Boolean, default=False)
     # 起送价格
@@ -43,6 +43,9 @@ class SellerShop(BaseModel):
                 v = True
             if hasattr(self, k) and k != 'id':
                 setattr(self, k, v)
+
+    def keys(self):
+        return "shop_name", "shop_img", "brand", "on_time", "fengniao", "bao", "piao", "zhun", "start_send", "send_cost", "notice", "discount"
 
     def __repr__(self):
         return '<Shop {} --- {}>'.format(self.shop_name, self.seller)

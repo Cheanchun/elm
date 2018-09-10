@@ -18,6 +18,9 @@ class MenuCategory(BaseModel):
 
     shop = db.relationship('SellerShop', backref='categories')
 
+    def keys(self):
+        return "pub_id", "name", "description", "type_accumulation", "is_default"
+
     def __repr__(self):
         return "<MenuCate {}>".format(self.name)
 
@@ -31,9 +34,9 @@ class MenuFood(BaseModel):
     # 菜品评分
     rating = db.Column(db.Float, default=5.0)
     # 归属店铺
-    shop_id = db.Column(db.Integer, db.ForeignKey('seller_shop.id'))
+    shop_id = db.Column(db.Integer, db.ForeignKey('seller_shop.pub_id'))
     # 归属分类
-    category_id = db.Column(db.Integer, db.ForeignKey('menu_category.id'))
+    category_id = db.Column(db.Integer, db.ForeignKey('menu_category.pub_id'))
     cates = db.relationship('MenuCategory', backref='foods')  # 添加一条关系
     # 菜品价格
     goods_price = db.Column(db.DECIMAL(6, 2), default=0.0)
@@ -47,6 +50,9 @@ class MenuFood(BaseModel):
     tips = db.Column(db.String(128), default='')
     # 菜品图片
     goods_img = db.Column(db.String(128), default='')
+
+    def keys(self):
+        return "goods_name", "shop_id", "category_id", "goods_price", "description", "tips", "goods_img"
 
     def __repr__(self):
         return "<Food: {}-{}>".format(self.food_name, self.food_price)

@@ -12,6 +12,10 @@ class BaseModel(db.Model):
             if hasattr(self, k) and k != 'id':
                 setattr(self, k, v)
 
+    def __getitem__(self, item):
+        if hasattr(self, item):
+            return getattr(self, item)
+
 
 # 用户数据表
 class User(BaseModel, UserMixin):

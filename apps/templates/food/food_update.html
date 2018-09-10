@@ -33,7 +33,7 @@
 
 
             <form action="" method="post" class="form-horizontal" novalidate>
-                {% for foo in form %}
+                {% for foo in food %}
                     <div style="height: 1rem"></div>
                     {% if not loop.last %}
                         <div>{{ foo.label }}{{ foo }}</div>

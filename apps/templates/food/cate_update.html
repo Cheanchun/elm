@@ -1,5 +1,5 @@
 {% extends 'bootstrap/base.html' %}
-{% block title %}菜品添加{% endblock %}
+{% block title %}商铺添加{% endblock %}
 {% block navbar %}
     <nav class="navbar navbar-inverse">
         <div class="container">
@@ -28,13 +28,12 @@
     <div class="container">
         <div class="col-xs-6 col-xs-offset-3">
             <div class="page-header">
-                <h3 class="text-center">添加菜品</h3>
+                <h3 class="text-center">添加分类</h3>
             </div>
 
 
             <form action="" method="post" class="form-horizontal" novalidate>
-                {% for foo in form %}
-                    <div style="height: 1rem"></div>
+                {% for foo in cate %}
                     {% if not loop.last %}
                         <div>{{ foo.label }}{{ foo }}</div>
                         <div class="text-danger">{{ foo.errors[0] }}</div>
@@ -42,15 +41,11 @@
                         {{ foo }}
                     {% endif %}
                 {% endfor %}
-                <div class="col-sm-offset-2 col-sm-10">
+                <div class="col-sm-offset-2 col-sm-10 ">
                     <div style="height: 10px"></div>
-                    <button type="submit" class="btn btn-success">确认添加</button>
-                    <div style="height: 10rem"></div>
+                    <button type="submit" class="btn btn-success">修改分类</button>&emsp;&emsp;&emsp;
                 </div>
-
-
             </form>
-
 
         </div>
     </div>
