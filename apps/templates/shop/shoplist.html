@@ -71,12 +71,12 @@
                                 <th>
                                     <a href="{{ url_for("cms.cate_add",shop_pub_id =store.pub_id ) }}">添加</a>
                                     &nbsp;&nbsp;
-                                    <a href="{{ url_for("cms.my_cate",shop_id=store.pub_id ) }}">查看</a>
+                                    <a href="{{ url_for("cms.my_cate",shop_pid=store.pub_id ) }}">查看</a>
                                 </th>
                                 <th>
                                     <a href="{{ url_for("cms.food_add",shop_pub_id=store.pub_id) }}">添加</a>
                                     &nbsp;&nbsp;
-                                    <a href="{{ url_for("cms.my_food",shop_id=store.pub_id ) }}">查看</a>
+                                    <a href="{{ url_for("cms.my_food",shop_pid=store.pub_id ) }}">查看</a>
                                 </th>
                             </tr>
                         {% endfor %}

@@ -14,7 +14,7 @@ class MenuCategory(BaseModel):
     # 是否默认
     is_default = db.Column(db.Boolean, default=False)
     # 归属店铺
-    shop_id = db.Column(db.Integer, db.ForeignKey('seller_shop.pub_id'))
+    shop_pid = db.Column(db.Integer, db.ForeignKey('seller_shop.pub_id'))
 
     shop = db.relationship('SellerShop', backref='categories')
 
@@ -34,9 +34,9 @@ class MenuFood(BaseModel):
     # 菜品评分
     rating = db.Column(db.Float, default=5.0)
     # 归属店铺
-    shop_id = db.Column(db.Integer, db.ForeignKey('seller_shop.pub_id'))
+    shop_pid = db.Column(db.Integer, db.ForeignKey('seller_shop.pub_id'))
     # 归属分类
-    category_id = db.Column(db.Integer, db.ForeignKey('menu_category.pub_id'))
+    category_pid = db.Column(db.Integer, db.ForeignKey('menu_category.pub_id'))
     cates = db.relationship('MenuCategory', backref='foods')  # 添加一条关系
     # 菜品价格
     goods_price = db.Column(db.DECIMAL(6, 2), default=0.0)

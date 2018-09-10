@@ -60,7 +60,7 @@
                             <tr>
                                 <th>{{ loop.index }}</th>
                                 <th>
-                                    <a href="{{ url_for("cms.cate_update",pub_id =cate.pub_id,shop_id =cate.shop_id ) }}">{{ cate.name }}</a>
+                                    <a href="{{ url_for("cms.cate_update",pub_id =cate.pub_id,shop_pid =cate.shop_pid ) }}">{{ cate.name }}</a>
                                 </th>
                                 <th>{{ cate.description }}</th>
                                 <th>{{ cate.type_accumulation }}</th>
