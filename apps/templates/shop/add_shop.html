@@ -34,31 +34,67 @@
 
             <form action="{{ url_for("cms.add_shop") }}" method="post" class="form-horizontal" novalidate>
 
-            {% for foo in shopform %}
-                {% if not loop.last %}
-                    {{ foo.label }}{{ foo }}
-{#                    <span class="">{{ foo.label}}</span><span>{{ foo }}</span>#}
-                        <div class="text-danger">{{ foo.errors[0] }}</div>
+                {% for foo in shopform %}
+                    {% if not loop.last %}
+                        {% if foo.id =="image-url" %}
+                            <button id="image-input">上传图片</button>
+                            {{ foo }}
+                            <img src="" id="image" alt="">
+
+                        {% else %}
+                            {{ foo.label }}{{ foo }}
+                            <div class="text-danger">{{ foo.errors[0] }}</div>
+                        {% endif %}
                     {% else %}
                         {{ foo }}
                     {% endif %}
-                <div style="height: 1.5rem"></div>
-            {% endfor %}
 
-            {% for get_flashed_message in get_flashed_messages() %}
-                <div class="text-danger">{{ get_flashed_message }}</div>
-            {% endfor %}
 
+                    <div style="height: 1.5rem"></div>
+                {% endfor %}
+
+                {% for get_flashed_message in get_flashed_messages() %}
+                    <div class="text-danger">{{ get_flashed_message }}</div>
+                {% endfor %}
                 <div style="height: 10px"></div>
                 <button type="submit" style=";margin-left: 100px" class="btn btn-success">提交店铺信息</button>
-                <button type="button" style=";margin-left: 100px" class="btn btn-success"><a href="{{ url_for("cms.my_shop") }}" style="color: white">取消</a></button>
+                <button type="button" style=";margin-left: 100px" class="btn btn-success"><a
+                        href="{{ url_for("cms.my_shop") }}" style="color: white">取消</a></button>
             </form>
             <div style="height: 100px"></div>
 
 
-
         </div>
     </div>
+    <script>
+        window.onload = function () {
+            itqiniu.setUp({
+                'domain': 'http://pepuwqajt.bkt.clouddn.com/',
+                'browse_btn': 'image-input',
+                'uptoken_url': '/get_uptoken/',
+                'success': function (up, file, info) {
+                    var image_url = file.name;
+                    var image_input = document.getElementById('image-url');
+                    image_input.value = image_url;
+                    var img = document.getElementById('image');
+                    img.setAttribute('src', image_url);
+                },
+            });
+        };
+    </script>
 {% endblock %}
+
+
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/Plupload/2.1.1/moxie.js"></script>
+    <script src="https://cdn.staticfile.org/Plupload/2.1.1/plupload.dev.js"></script>
+    <script src="https://cdn.staticfile.org/qiniu-js-sdk/1.0.14-beta/qiniu.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename="itqiniu.js") }}"></script>
+{% endblock %}
+
 
 

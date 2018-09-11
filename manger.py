@@ -16,5 +16,4 @@ manger = Manager(app, db)
 manger.add_command('db', MigrateCommand)
 
 if __name__ == '__main__':
-
     manger.run()

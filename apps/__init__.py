@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_session import Session
 from apps.cms import cms_bp
+from apps.apis import api_bp
 from apps.model import db
 from flask_login import LoginManager
 
@@ -8,13 +9,18 @@ from apps.model.user_model import User
 
 login_manager = LoginManager()
 login_manager.login_view = 'cms.login'
+
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
 
 def register_blue(app):
+    # cms 蓝图
     app.register_blueprint(cms_bp)
+    # api 蓝图
+    app.register_blueprint(api_bp)
 
 
 def register_session(app):
@@ -29,7 +35,7 @@ def app_config(app):
 
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, static_url_path='/static', static_folder=r'D:\projects\elm\apps\static')
     app_config(app)
     # 初始化 数据库模型
     db.init_app(app)
@@ -38,7 +44,7 @@ def create_app():
     register_session(app)
     # 注册蓝图
     register_blue(app)
-
+    # print(os.getcwd())
     # print(app.url_map)
-    print(app.config)
+    # print(app.config)
     return app

@@ -1,6 +1,7 @@
 from flask_login import current_user
 from flask_wtf import FlaskForm
 from wtforms import *
+from wtforms.widgets import HiddenInput
 
 
 class MenuFoodUpdateForm(FlaskForm):
@@ -81,7 +82,7 @@ class MenuFoodForm(FlaskForm):
     #                     )
     # 归属店铺
     shop_pid = SelectField(label="归属店铺 :",
-                           render_kw={"class": "form-control", "placeholder": "", "required": 'required'}
+                           render_kw={"class": "form-control", "placeholder": "", "required": 'required'},
                            )
 
     def __init__(self, *args, **kwargs):
@@ -118,7 +119,10 @@ class MenuFoodForm(FlaskForm):
                        )
     # 菜品图片
     goods_img = StringField(label="图片",
-                            render_kw={"class": "form-control", "placeholder": "", "required": 'required'})
+                            render_kw={"class": "form-control"},
+                            id="image-url",
+                            widget=HiddenInput(),
+                            )
 
 
 class MenuCategoryForm(FlaskForm):

@@ -1,5 +1,6 @@
 from uuid import uuid4
-from flask import url_for, request, render_template, abort
+from flask import url_for, request, render_template, abort, jsonify
+from qiniu import Auth
 from werkzeug.utils import redirect
 from apps.model import db
 from apps.cms import cms_bp
@@ -49,7 +50,6 @@ def add_shop():
         return render_template("shop/add_shop.html", shopform=shopform)
 
 
-
 @cms_bp.route("/shop_upgrade/<pub_id>/", endpoint="shop_update", methods=["GET", "POST"])
 @login_required
 def shop_update(pub_id):
@@ -67,4 +67,13 @@ def shop_update(pub_id):
         return redirect(url_for("cms.my_shop"))
 
 
+@cms_bp.route("/get_uptoken", endpoint="get_uptoken", methods=["POST"])
+@login_required
+def get_uptoken():
+
+    q = Auth(access_key="iN8FlQzH6c5FpvfmxWAO8-xpuaObKCczZd18nmDv",
+             secret_key="JGSRhbzEHTUIVCBijaOGvLDlQrR5AXy7XK8JOfvF",
+            )
+    token = q.upload_token(bucket="七牛云文件夹名字")
+    return jsonify({"uptoken":token})
 

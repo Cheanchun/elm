@@ -52,7 +52,7 @@ def my_cate(shop_pid):
 @login_required
 def cate_update(shop_pid, pub_id):
     cate = check_cate_pub_id(shop_pid, pub_id)
-    print(dir(cate))
+    # print(dir(cate))
 
     update_form = MenuCategoryForm(request.form)
     if request.method == "GET":
@@ -89,7 +89,7 @@ def food_add(shop_pub_id):
 @login_required
 def my_food(shop_pid):
     foods = MenuFood.query.filter_by(shop_pid=shop_pid).all()
-    print(dir(foods))
+    # print(dir(foods))
     return render_template("food/food_list.html", foods=foods)
 
 

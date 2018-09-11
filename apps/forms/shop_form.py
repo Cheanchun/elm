@@ -1,12 +1,12 @@
 from wtforms import *
 
 from flask_wtf import FlaskForm
+from wtforms.widgets import HiddenInput
 
 from apps.model.shop_model import SellerShop
 
 
 class ShopForm(FlaskForm):
-
     shop_name = StringField(label="店铺名称 :",
                             validators=(validators.DataRequired(message="请填写店铺名称"),
 
@@ -50,12 +50,15 @@ class ShopForm(FlaskForm):
     discount = StringField(label="优惠信息 :",
                            render_kw={"class": "form-control", "placeholder": "优惠信息!"}
                            )
+    # 店铺logo图片
+    # shop_img = db.Column(db.String(128))
+    shop_img = StringField(label="图片",
+                           id="image-url",
+                           render_kw={"class": "form-control"},
+                           widget=HiddenInput(),
+                           )
 
     # 店铺名称唯一性
     # def validate_shop_name(self, shop_name):
     #     if SellerShop.query.filter_by(shop_name=shop_name.data).first():
     #         raise validators.ValidationError(message="店铺名称已存在!")
-
-
-
-
