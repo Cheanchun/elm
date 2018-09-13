@@ -1,5 +1,5 @@
 from apps.model import db
-from .user_model import BaseModel
+from .seller_model import BaseModel
 
 
 class MenuCategory(BaseModel):
@@ -39,7 +39,7 @@ class MenuFood(BaseModel):
     category_pid = db.Column(db.Integer, db.ForeignKey('menu_category.pub_id'))
     cates = db.relationship('MenuCategory', backref='foods')  # 添加一条关系
     # 菜品价格
-    goods_price = db.Column(db.DECIMAL(6, 2), default=0.0)
+    goods_price = db.Column(db.Float, default=0.0)
     # 菜品描述
     description = db.Column(db.String(128), default='')
     # 月销售额

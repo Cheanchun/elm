@@ -4,13 +4,13 @@ from flask import (render_template,
                    redirect,
                    url_for,
                    flash,
-                   session)
+                   )
 import uuid
 from apps.model import db
-from apps.forms.user_form import (RegisterForm,
-                                  UserLogin,
-                                  )
-from apps.model.user_model import User
+from apps.forms.seller_form import (RegisterForm,
+                                    UserLogin,
+                                    )
+from apps.model.seller_model import User
 from werkzeug.security import (generate_password_hash,
                                check_password_hash,
                                )
@@ -25,7 +25,7 @@ def user_home():
         1.如果用户登陆(session存在标记,直接访问用户页面,如果没有登陆,重定向到登陆页面)
     :return:
     '''
-    return render_template("user/userhome.html")
+    return render_template("cms/user/userhome.html")
 
 
 # 用户注册
@@ -51,7 +51,7 @@ def register():
 
         return redirect(url_for("cms.login"))
     else:
-        return render_template("user/register.html", form=form)
+        return render_template("cms/user/register.html", form=form)
 
 
 # 用户登陆
@@ -88,7 +88,7 @@ def login():
             相当于一个可迭代对象,
             '''
             flash("用户名或密码错误!")
-    return render_template("user/login.html", form=form)
+    return render_template("cms/user/login.html", form=form)
 
 
 # 用户注销

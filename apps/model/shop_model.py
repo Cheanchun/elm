@@ -1,5 +1,5 @@
 from apps.model import db
-from .user_model import BaseModel
+from .seller_model import BaseModel
 
 
 # 商家店铺信息表

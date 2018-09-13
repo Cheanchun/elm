@@ -6,10 +6,8 @@ from apps.forms.food_form import MenuCategoryForm, MenuFoodForm, MenuFoodUpdateF
 from apps.model import db
 from apps.cms import cms_bp
 from flask_login import current_user, login_required
-
-from apps.forms.shop_form import ShopForm
 from apps.model.food_model import MenuCategory, MenuFood
-from apps.model.shop_model import SellerShop
+
 
 # 添加分类
 from apps.model.food_model import MenuCategory
@@ -36,7 +34,7 @@ def cate_add(shop_pub_id):
         db.session.add(cate)
         db.session.commit()
         return redirect(url_for("cms.my_shop"))
-    return render_template("food/add_cate.html", form=cate_form)
+    return render_template("cms/food/add_cate.html", form=cate_form)
 
 
 # 分类列表
@@ -44,7 +42,7 @@ def cate_add(shop_pub_id):
 @login_required
 def my_cate(shop_pid):
     cates = MenuCategory.query.filter_by(shop_pid=shop_pid).all()
-    return render_template("food/cate_list.html", cates=cates)
+    return render_template("cms/food/cate_list.html", cates=cates)
 
 
 # 分类更新
@@ -57,7 +55,7 @@ def cate_update(shop_pid, pub_id):
     update_form = MenuCategoryForm(request.form)
     if request.method == "GET":
         cate_form = MenuCategoryForm(data=dict(cate))
-        return render_template("food/cate_update.html", cate=cate_form)
+        return render_template("cms/food/cate_update.html", cate=cate_form)
     elif request.method == "POST" and update_form.validate():
         # post提交数据
         cate = check_cate_pub_id(shop_pid, pub_id)
@@ -81,7 +79,7 @@ def food_add(shop_pub_id):
         db.session.add(food)
         db.session.commit()
         return redirect(url_for("cms.my_shop"))
-    return render_template("food/add_food.html", form=food_form)
+    return render_template("cms/food/add_food.html", form=food_form)
 
 
 # 查看店铺菜品
@@ -90,7 +88,7 @@ def food_add(shop_pub_id):
 def my_food(shop_pid):
     foods = MenuFood.query.filter_by(shop_pid=shop_pid).all()
     # print(dir(foods))
-    return render_template("food/food_list.html", foods=foods)
+    return render_template("cms/food/food_list.html", foods=foods)
 
 
 @cms_bp.route("/food_update/<food_pid>/<shop_pub_id>/", endpoint="food_update", methods=["GET", "POST"])
@@ -101,7 +99,7 @@ def food_update(food_pid, shop_pub_id):
     if request.method == "GET":
         cates = MenuCategory.query.filter_by(shop_pid=shop_pub_id).all()
         food_form = MenuFoodForm(cates, data=dict(food))
-        return render_template("food/food_update.html", food=food_form)
+        return render_template("cms/food/food_update.html", food=food_form)
     elif request.method == "POST":
         # post提交数据
         food.set_attrs(update_form.data)
