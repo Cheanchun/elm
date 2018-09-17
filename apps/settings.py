@@ -11,7 +11,6 @@ from redis import Redis
 api_redis = Redis(host="192.168.231.134", port=6388)
 
 
-
 # app通用配置
 class BaseConfig:
     DEBUG = False
@@ -26,8 +25,6 @@ class DevConfig(BaseConfig):
     DEBUG = True
     # 服务器名称
     # SERVER_NAME = 'elm.com:5000'
-    # 配置orm 数据库引擎
-    # SQLALCHEMY_DATABASE_URI = 'sqlite:///H:myDB\\orm.sqlite'
     SESSION_TYPE = "redis"
     SESSION_REDIS = Redis("192.168.231.134", 6388)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
