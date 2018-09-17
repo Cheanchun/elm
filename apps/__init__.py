@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_bootstrap import Bootstrap
 from flask_session import Session
 from apps.apis import api_bp
 from apps.cms import cms_bp
@@ -33,8 +34,7 @@ def app_config(app):
 
 
 def create_app():
-    app = Flask(__name__, static_url_path='/static', static_folder=r'D:\projects\elm\apps\static',
-                )
+    app = Flask(__name__)
     app_config(app)
     # 初始化 数据库模型
     db.init_app(app)
@@ -44,6 +44,7 @@ def create_app():
     # 注册蓝图
     register_blue(app)
     # print(os.getcwd())
+    Bootstrap(app)
     print(app.url_map)
     print(app.config)
     return app
@@ -84,5 +85,5 @@ def create_api_app():
     register_api_blue(vue_app)
     # print(os.getcwd())
     print(vue_app.url_map)
-    print(vue_app.config)
+    # print(vue_app.config)
     return vue_app

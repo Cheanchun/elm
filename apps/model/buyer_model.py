@@ -46,3 +46,4 @@ class BuyerAddressModel(BaseModel):
 
     def keys(self):
         return "provence", "city", "area", "detail_address", "name", "tel","id"
+

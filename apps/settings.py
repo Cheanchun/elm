@@ -3,7 +3,13 @@ from datetime import timedelta
 from redis import Redis
 
 # redis 连接基本配置
+# 阿里云 redis
+# api_redis = Redis(host="47.105.54.129", port=6388)
+# 本地redis
+# api_redis = Redis(host="127.0.0.1", port=6388)
+# 虚拟机 redis
 api_redis = Redis(host="192.168.231.134", port=6388)
+
 
 
 # app通用配置
@@ -11,7 +17,7 @@ class BaseConfig:
     DEBUG = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = "ABC"
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///{}\\orm.sqlite'.format(os.getcwd())
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///{}/orm.sqlite'.format(os.getcwd())
 
 
 # 开发配置
@@ -19,7 +25,7 @@ class DevConfig(BaseConfig):
     # 调试模式
     DEBUG = True
     # 服务器名称
-    SERVER_NAME = 'elm.com:5000'
+    # SERVER_NAME = 'elm.com:5000'
     # 配置orm 数据库引擎
     # SQLALCHEMY_DATABASE_URI = 'sqlite:///H:myDB\\orm.sqlite'
     SESSION_TYPE = "redis"
@@ -38,9 +44,7 @@ class ProConfig(BaseConfig):
 
 class ApiConfig(BaseConfig):
     DEBUG = True
-    SERVER_NAME = 'elm.com:8080'
+    # SERVER_NAME = 'elm.com:8080'
     # 验证码过期时间
     SMS_LIFETIME = timedelta(days=1)
     TOKEN_EXPIRES = 3600
-    # SMS_PORT = 6379
-    # SMS_HOSTS = "127.0.0.1"
